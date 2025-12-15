@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="M&Y - Lüks otel arama ve rezervasyon platformu. Hayalinizdeki tatili keşfedin.">
+    <title>M&Y | Lüksün Yeni Adresi</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <!-- ================================
+         NAVBAR
+         ================================ -->
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">
+            🏨 LUX<span>STAY</span>
+        </a>
+
+        <ul class="navbar-nav" id="navbarNav">
+            <li><a href="#hotels">Oteller</a></li>
+            <li><a href="#about">Hakkımızda</a></li>
+            <li><a href="#contact">İletişim</a></li>
+        </ul>
+
+        <button class="navbar-toggle" id="navbarToggle">☰</button>
+    </nav>
+
+    <!-- ================================
+         HERO SECTION
+         ================================ -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Lüksün <span>Yeni Adresi</span></h1>
+            <p>Hayalinizdeki tatili keşfedin. En seçkin otellerde unutulmaz anılar biriktirin.</p>
+        </div>
+
+        <!-- Search Box -->
+        <div class="search-box">
+            <form class="search-form" id="searchForm">
+                <div class="form-group">
+                    <label for="checkIn">📅 Giriş Tarihi</label>
+                    <input type="date" id="checkIn" value="2024-12-15" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="checkOut">📅 Çıkış Tarihi</label>
+                    <input type="date" id="checkOut" value="2024-12-20" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="city">🏙 Şehir</label>
+                    <input type="text" id="city" placeholder="İstanbul" value="İstanbul" required>
+                </div>
+
+                <button type="submit" class="btn-search">
+                    🔍 Otel Ara
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ================================
+         MAIN CONTENT
+         ================================ -->
+    <main class="main-content" id="hotels">
+        <!-- Hotels Section -->
+        <section class="hotels-section">
+            <h2 class="section-title">🏨 Öne Çıkan Oteller</h2>
+            <div class="hotels-grid" id="hotelsGrid">
+
+                <!-- OTEL 1: The Grand Palace Hotel -->
+                <div class="hotel-card" data-modal="modal-hotel-1">
+                    <div class="hotel-card-image">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800"
+                            alt="The Grand Palace Hotel">
+                        <span class="hotel-badge">En Çok Tercih Edilen</span>
+                        <span class="hotel-rating">⭐ 9.2</span>
+                    </div>
+                    <div class="hotel-card-content">
+                        <h3>The Grand Palace Hotel</h3>
+                        <p class="hotel-card-location">📍 Sultanahmet, İstanbul</p>
+                        <div class="hotel-card-amenities">
+                            <span class="amenity-tag">Spa</span>
+                            <span class="amenity-tag">Havuz</span>
+                            <span class="amenity-tag">Restoran</span>
+                            <span class="amenity-tag">WiFi</span>
+                        </div>
+                        <div class="hotel-card-footer">
+                            <div class="hotel-price">₺4.500 <span>/ gece</span></div>
+                            <button class="btn-details">Detaylar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OTEL 2: Azure Bosphorus Resort -->
+                <div class="hotel-card" data-modal="modal-hotel-2">
+                    <div class="hotel-card-image">
+                        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800"
+                            alt="Azure Bosphorus Resort">
+                        <span class="hotel-badge">Boğaz Manzarası</span>
+                        <span class="hotel-rating">⭐ 8.8</span>
+                    </div>
+                    <div class="hotel-card-content">
+                        <h3>Azure Bosphorus Resort</h3>
+                        <p class="hotel-card-location">📍 Beşiktaş, İstanbul</p>
+                        <div class="hotel-card-amenities">
+                            <span class="amenity-tag">Spa</span>
+                            <span class="amenity-tag">Teras</span>
+                            <span class="amenity-tag">Bar</span>
+                            <span class="amenity-tag">WiFi</span>
+                        </div>
+                        <div class="hotel-card-footer">
+                            <div class="hotel-price">₺3.800 <span>/ gece</span></div>
+                            <button class="btn-details">Detaylar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OTEL 3: Sultan's Heritage Inn -->
+                <div class="hotel-card" data-modal="modal-hotel-3">
+                    <div class="hotel-card-image">
+                        <img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800"
+                            alt="Sultan's Heritage Inn">
+                        <span class="hotel-badge">Tarihi Konak</span>
+                        <span class="hotel-rating">⭐ 8.5</span>
+                    </div>
+                    <div class="hotel-card-content">
+                        <h3>Sultan's Heritage Inn</h3>
+                        <p class="hotel-card-location">📍 Fatih, İstanbul</p>
+                        <div class="hotel-card-amenities">
+                            <span class="amenity-tag">Bahçe</span>
+                            <span class="amenity-tag">Restoran</span>
+                            <span class="amenity-tag">WiFi</span>
+                        </div>
+                        <div class="hotel-card-footer">
+                            <div class="hotel-price">₺2.200 <span>/ gece</span></div>
+                            <button class="btn-details">Detaylar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OTEL 4: Modern City Suites -->
+                <div class="hotel-card" data-modal="modal-hotel-4">
+                    <div class="hotel-card-image">
+                        <img src="https://images.unsplash.com/photo-1606046604972-77cc76aee944?w=800"
+                            alt="Modern City Suites">
+                        <span class="hotel-badge">İş Seyahati</span>
+                        <span class="hotel-rating">⭐ 8.3</span>
+                    </div>
+                    <div class="hotel-card-content">
+                        <h3>Modern City Suites</h3>
+                        <p class="hotel-card-location">📍 Şişli, İstanbul</p>
+                        <div class="hotel-card-amenities">
+                            <span class="amenity-tag">Toplantı</span>
+                            <span class="amenity-tag">Gym</span>
+                            <span class="amenity-tag">WiFi</span>
+                            <span class="amenity-tag">Bar</span>
+                        </div>
+                        <div class="hotel-card-footer">
+                            <div class="hotel-price">₺1.900 <span>/ gece</span></div>
+                            <button class="btn-details">Detaylar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OTEL 5: Galata Tower Hotel -->
+                <div class="hotel-card" data-modal="modal-hotel-5">
+                    <div class="hotel-card-image">
+                        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800"
+                            alt="Galata Tower Hotel">
+                        <span class="hotel-badge">Romantik Kaçamak</span>
+                        <span class="hotel-rating">⭐ 8.7</span>
+                    </div>
+                    <div class="hotel-card-content">
+                        <h3>Galata Tower Hotel</h3>
+                        <p class="hotel-card-location">📍 Beyoğlu, İstanbul</p>
+                        <div class="hotel-card-amenities">
+                            <span class="amenity-tag">Teras</span>
+                            <span class="amenity-tag">Cafe</span>
+                            <span class="amenity-tag">WiFi</span>
+                            <span class="amenity-tag">Bar</span>
+                        </div>
+                        <div class="hotel-card-footer">
+                            <div class="hotel-price">₺2.800 <span>/ gece</span></div>
+                            <button class="btn-details">Detaylar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Currency Widget -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i>💰</i> Döviz Kurları</h3>
+                <div class="currency-list">
+                    <div class="currency-item">
+                        <span class="currency-name">USD / TRY</span>
+                        <span class="currency-value">34.25 ₺</span>
+                        <span class="currency-change up">+0.15%</span>
+                    </div>
+                    <div class="currency-item">
+                        <span class="currency-name">EUR / TRY</span>
+                        <span class="currency-value">37.80 ₺</span>
+                        <span class="currency-change up">+0.22%</span>
+                    </div>
+                    <div class="currency-item">
+                        <span class="currency-name">GBP / TRY</span>
+                        <span class="currency-value">43.50 ₺</span>
+                        <span class="currency-change down">-0.08%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crypto Widget -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i>💎</i> Kripto Para</h3>
+                <div class="crypto-list">
+                    <div class="crypto-item">
+                        <div class="crypto-icon btc">₿</div>
+                        <div class="crypto-info">
+                            <div class="crypto-name">Bitcoin</div>
+                            <div class="crypto-symbol">BTC</div>
+                        </div>
+                        <div class="crypto-price">
+                            <div class="crypto-value">$42,500</div>
+                            <span class="currency-change up">+2.4%</span>
+                        </div>
+                    </div>
+                    <div class="crypto-item">
+                        <div class="crypto-icon eth">Ξ</div>
+                        <div class="crypto-info">
+                            <div class="crypto-name">Ethereum</div>
+                            <div class="crypto-symbol">ETH</div>
+                        </div>
+                        <div class="crypto-price">
+                            <div class="crypto-value">$2,250</div>
+                            <span class="currency-change up">+1.8%</span>
+                        </div>
+                    </div>
+                    <div class="crypto-item">
+                        <div class="crypto-icon bnb">B</div>
+                        <div class="crypto-info">
+                            <div class="crypto-name">BNB</div>
+                            <div class="crypto-symbol">BNB</div>
+                        </div>
+                        <div class="crypto-price">
+                            <div class="crypto-value">$315</div>
+                            <span class="currency-change down">-0.5%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fuel Widget -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i>⛽</i> Akaryakıt Fiyatları</h3>
+                <div class="fuel-list">
+                    <div class="fuel-item">
+                        <span class="fuel-name">🔴 Benzin (95)</span>
+                        <span class="fuel-value">44.50 ₺</span>
+                    </div>
+                    <div class="fuel-item">
+                        <span class="fuel-name">🟤 Motorin</span>
+                        <span class="fuel-value">42.80 ₺</span>
+                    </div>
+                    <div class="fuel-item">
+                        <span class="fuel-name">🟢 LPG</span>
+                        <span class="fuel-value">17.25 ₺</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weather Widget -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i>☁️</i> Hava Durumu - İstanbul</h3>
+                <div class="weather-card">
+                    <div class="weather-icon">🌤️</div>
+                    <div class="weather-temp">18°C</div>
+                    <div class="weather-desc">Parçalı Bulutlu</div>
+                    <div class="weather-details">
+                        <span>💧 Nem: 65%</span>
+                        <span>💨 Rüzgar: 12 km/s</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Food Suggestion Widget -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i>🍽️</i> Günün Yemeği Önerisi</h3>
+                <div class="food-card">
+                    <div class="food-emoji">🥗</div>
+                    <div class="food-title">Akdeniz Esintisi</div>
+                    <div class="food-desc">
+                        <strong>Zeytinyağlı Enginar</strong><br>
+                        Taze enginarlar, zeytinyağı, limon ve baharatlarla hazırlanan bu geleneksel Türk mezesi, hem
+                        sağlıklı hem de lezzetli bir seçenek.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Travel Routes Widget -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i>🗺️</i> İstanbul Gezi Rotası</h3>
+                <div class="route-list">
+                    <div class="route-item">
+                        <span class="route-number">1</span>
+                        <div class="route-info">
+                            <h4>Ayasofya Camii</h4>
+                            <p>Bizans mimarisinin en önemli eseri, 1500 yıllık tarihi.</p>
+                        </div>
+                    </div>
+                    <div class="route-item">
+                        <span class="route-number">2</span>
+                        <div class="route-info">
+                            <h4>Topkapı Sarayı</h4>
+                            <p>Osmanlı padişahlarının 400 yıl boyunca yaşadığı saray.</p>
+                        </div>
+                    </div>
+                    <div class="route-item">
+                        <span class="route-number">3</span>
+                        <div class="route-info">
+                            <h4>Kapalıçarşı</h4>
+                            <p>Dünyanın en eski ve büyük kapalı çarşılarından biri.</p>
+                        </div>
+                    </div>
+                    <div class="route-item">
+                        <span class="route-number">4</span>
+                        <div class="route-info">
+                            <h4>Galata Kulesi</h4>
+                            <p>İstanbul'un 360 derece panoramik manzarası.</p>
+                        </div>
+                    </div>
+                    <div class="route-item">
+                        <span class="route-number">5</span>
+                        <div class="route-info">
+                            <h4>Boğaz Turu</h4>
+                            <p>İki kıtayı birleştiren eşsiz deniz yolculuğu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-col">
+                <div class="footer-brand">🏨 LUX<span>STAY</span></div>
+                <p class="footer-desc">
+                    Lüks konaklama deneyiminin yeni adresi. En seçkin otellerde unutulmaz anılar biriktirin.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Hızlı Linkler</h4>
+                <ul class="footer-links">
+                    <li><a href="#hotels">Oteller</a></li>
+                    <li><a href="#about">Hakkımızda</a></li>
+                    <li><a href="#contact">İletişim</a></li>
+                    <li><a href="#">SSS</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Destek</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Yardım Merkezi</a></li>
+                    <li><a href="#">İptal Politikası</a></li>
+                    <li><a href="#">Gizlilik Politikası</a></li>
+                    <li><a href="#">Kullanım Şartları</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">İletişim</h4>
+                <ul class="footer-links">
+                    <li>📧 info@M&Y.com</li>
+                    <li>📞 +90 212 555 00 00</li>
+                    <li>📍 İstanbul, Türkiye</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 M&Y. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <!-- ================================
+         MODALS (Her otel için ayrı modal)
+         ================================ -->
+
+    <!-- Modal 1: The Grand Palace Hotel -->
+    <div class="modal-overlay" id="modal-hotel-1">
+        <div class="modal">
+            <button class="modal-close">✕</button>
+            <div class="modal-slider">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800"
+                    alt="The Grand Palace Hotel" class="slider-image active">
+                <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800"
+                    alt="The Grand Palace Hotel" class="slider-image">
+                <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800"
+                    alt="The Grand Palace Hotel" class="slider-image">
+                <button class="slider-btn prev">❮</button>
+                <button class="slider-btn next">❯</button>
+                <div class="slider-dots">
+                    <span class="slider-dot active"></span>
+                    <span class="slider-dot"></span>
+                    <span class="slider-dot"></span>
+                </div>
+            </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">The Grand Palace Hotel</h2>
+                    <span class="modal-rating">⭐ 9.2</span>
+                </div>
+                <p class="modal-location">📍 Sultanahmet, İstanbul</p>
+                <p class="modal-description">
+                    İstanbul'un kalbinde, tarihi Sultanahmet Meydanı'na yürüme mesafesinde konumlanan The Grand Palace
+                    Hotel, misafirlerine unutulmaz bir konaklama deneyimi sunuyor. Osmanlı mimarisiyle modern konforun
+                    buluştuğu otelimiz, 150 lüks oda ve süitle hizmet vermektedir.
+                </p>
+                <div class="modal-features">
+
+                    <div class="feature-item"><i>✓</i> Ücretsiz WiFi</div>
+                    <div class="feature-item"><i>✓</i> Spa & Wellness</div>
+                    <div class="feature-item"><i>✓</i> Açık Havuz</div>
+                    <div class="feature-item"><i>✓</i> 24 Saat Oda Servisi</div>
+                    <div class="feature-item"><i>✓</i> Özel Otopark</div>
+                    <div class="feature-item"><i>✓</i> Fitness Center</div>
+                </div>
+                <div class="modal-footer">
+                    <div class="modal-price">₺4.500 <span>/ gece</span></div>
+                    <button class="btn-book">Rezervasyon Yap</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Azure Bosphorus Resort -->
+    <div class="modal-overlay" id="modal-hotel-2">
+        <div class="modal">
+            <button class="modal-close">✕</button>
+            <div class="modal-slider">
+                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800"
+                    alt="Azure Bosphorus Resort" class="slider-image active">
+                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800"
+                    alt="Azure Bosphorus Resort" class="slider-image">
+                <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=800"
+                    alt="Azure Bosphorus Resort" class="slider-image">
+                <button class="slider-btn prev">❮</button>
+                <button class="slider-btn next">❯</button>
+                <div class="slider-dots">
+                    <span class="slider-dot active"></span>
+                    <span class="slider-dot"></span>
+                    <span class="slider-dot"></span>
+                </div>
+            </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Azure Bosphorus Resort</h2>
+                    <span class="modal-rating">⭐ 8.8</span>
+                </div>
+                <p class="modal-location">📍 Beşiktaş, İstanbul</p>
+                <p class="modal-description">
+                    Boğaz'ın eşsiz manzarasına hakim Azure Bosphorus Resort, modern tasarımı ve üstün hizmet anlayışıyla
+                    öne çıkıyor. Tüm odalarımızdan İstanbul Boğazı'nın muhteşem görüntüsü seyredebilirsiniz.
+                </p>
+                <div class="modal-features">
+                    <div class="feature-item"><i>✓</i> Boğaz Manzarası</div>
+                    <div class="feature-item"><i>✓</i> Teras Restaurant</div>
+                    <div class="feature-item"><i>✓</i> Spa Center</div>
+                    <div class="feature-item"><i>✓</i> Concierge</div>
+                    <div class="feature-item"><i>✓</i> Vale Parking</div>
+                    <div class="feature-item"><i>✓</i> Business Center</div>
+                </div>
+                <div class="modal-footer">
+                    <div class="modal-price">₺3.800 <span>/ gece</span></div>
+                    <button class="btn-book">Rezervasyon Yap</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Sultan's Heritage Inn -->
+    <div class="modal-overlay" id="modal-hotel-3">
+        <div class="modal">
+            <button class="modal-close">✕</button>
+            <div class="modal-slider">
+                <img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800"
+                    alt="Sultan's Heritage Inn" class="slider-image active">
+                <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800"
+                    alt="Sultan's Heritage Inn" class="slider-image">
+                <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800"
+                    alt="Sultan's Heritage Inn" class="slider-image">
+                <button class="slider-btn prev">❮</button>
+                <button class="slider-btn next">❯</button>
+                <div class="slider-dots">
+                    <span class="slider-dot active"></span>
+                    <span class="slider-dot"></span>
+                    <span class="slider-dot"></span>
+                </div>
+            </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Sultan's Heritage Inn</h2>
+                    <span class="modal-rating">⭐ 8.5</span>
+                </div>
+                <p class="modal-location">📍 Fatih, İstanbul</p>
+                <p class="modal-description">
+                    Restore edilmiş Osmanlı konağında benzersiz bir konaklama deneyimi. Sultan's Heritage Inn, tarih ve
+                    lüksü bir arada sunarak misafirlerine zamanda yolculuk hissi yaşatıyor.
+                </p>
+                <div class="modal-features">
+                    <div class="feature-item"><i>✓</i> Tarihi Atmosfer</div>
+                    <div class="feature-item"><i>✓</i> Bahçe</div>
+                    <div class="feature-item"><i>✓</i> Türk Mutfağı</div>
+                    <div class="feature-item"><i>✓</i> Ücretsiz WiFi</div>
+                    <div class="feature-item"><i>✓</i> Transfer</div>
+                    <div class="feature-item"><i>✓</i> Rehberlik</div>
+                </div>
+                <div class="modal-footer">
+                    <div class="modal-price">₺2.200 <span>/ gece</span></div>
+                    <button class="btn-book">Rezervasyon Yap</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Modern City Suites -->
+    <div class="modal-overlay" id="modal-hotel-4">
+        <div class="modal">
+            <button class="modal-close">✕</button>
+            <div class="modal-slider">
+                <img src="https://images.unsplash.com/photo-1606046604972-77cc76aee944?w=800" alt="Modern City Suites"
+                    class="slider-image active">
+                <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800" alt="Modern City Suites"
+                    class="slider-image">
+                <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800" alt="Modern City Suites"
+                    class="slider-image">
+                <button class="slider-btn prev">❮</button>
+                <button class="slider-btn next">❯</button>
+                <div class="slider-dots">
+                    <span class="slider-dot active"></span>
+                    <span class="slider-dot"></span>
+                    <span class="slider-dot"></span>
+                </div>
+            </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Modern City Suites</h2>
+                    <span class="modal-rating">⭐ 8.3</span>
+                </div>
+                <p class="modal-location">📍 Şişli, İstanbul</p>
+                <p class="modal-description">
+                    İş ve keyif seyahatleri için ideal olan Modern City Suites, şehrin merkezinde konforlu ve
+                    fonksiyonel konaklama seçenekleri sunuyor. Metro ve alışveriş merkezlerine yürüme mesafesinde.
+                </p>
+                <div class="modal-features">
+                    <div class="feature-item"><i>✓</i> Toplantı Odaları</div>
+                    <div class="feature-item"><i>✓</i> Fitness</div>
+                    <div class="feature-item"><i>✓</i> Lounge Bar</div>
+                    <div class="feature-item"><i>✓</i> Ekspres Check-in</div>
+                    <div class="feature-item"><i>✓</i> Laundry</div>
+                    <div class="feature-item"><i>✓</i> Airport Shuttle</div>
+                </div>
+                <div class="modal-footer">
+                    <div class="modal-price">₺1.900 <span>/ gece</span></div>
+                    <button class="btn-book">Rezervasyon Yap</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 5: Galata Tower Hotel -->
+    <div class="modal-overlay" id="modal-hotel-5">
+        <div class="modal">
+            <button class="modal-close">✕</button>
+            <div class="modal-slider">
+                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800" alt="Galata Tower Hotel"
+                    class="slider-image active">
+                <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800" alt="Galata Tower Hotel"
+                    class="slider-image">
+                <img src="https://images.unsplash.com/photo-1587213811864-46e59f6873b1?w=800" alt="Galata Tower Hotel"
+                    class="slider-image">
+                <button class="slider-btn prev">❮</button>
+                <button class="slider-btn next">❯</button>
+                <div class="slider-dots">
+                    <span class="slider-dot active"></span>
+                    <span class="slider-dot"></span>
+                    <span class="slider-dot"></span>
+                </div>
+            </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Galata Tower Hotel</h2>
+                    <span class="modal-rating">⭐ 8.7</span>
+                </div>
+                <p class="modal-location">📍 Beyoğlu, İstanbul</p>
+                <p class="modal-description">
+                    Galata Kulesi'ne sadece birkaç adım uzaklıkta, Beyoğlu'nun canlı atmosferinin tam ortasında. Butik
+                    otelimiz, sanat ve tarih tutkunları için mükemmel bir konaklama noktası.
+                </p>
+                <div class="modal-features">
+                    <div class="feature-item"><i>✓</i> Teras Manzara</div>
+                    <div class="feature-item"><i>✓</i> Cafe & Bar</div>
+                    <div class="feature-item"><i>✓</i> Art Gallery</div>
+                    <div class="feature-item"><i>✓</i> Bike Rental</div>
+                    <div class="feature-item"><i>✓</i> City Tours</div>
+                    <div class="feature-item"><i>✓</i> Pet Friendly</div>
+                </div>
+                <div class="modal-footer">
+                    <div class="modal-price">₺2.800 <span>/ gece</span></div>
+                    <button class="btn-book">Rezervasyon Yap</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript (sadece interaktif işlemler için) -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

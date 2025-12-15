@@ -1,0 +1,414 @@
+﻿@model MainViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="M&Y - Lüks otel arama ve rezervasyon platformu. Hayalinizdeki tatili keşfedin.">
+    <title>M&Y | Lüksün Yeni Adresi</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="~/css/styles.css">
+</head>
+
+<body>
+    <!-- ================================
+         NAVBAR
+         ================================ -->
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">
+            🏨 M<span>Y</span>
+        </a>
+
+        <button class="navbar-toggle" id="navbarToggle">☰</button>
+    </nav>
+
+    <!-- ================================
+         HERO SECTION
+         ================================ -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Lüksün <span>Yeni Adresi</span></h1>
+            <p>Hayalinizdeki tatili keşfedin. En seçkin otellerde unutulmaz anılar biriktirin.</p>
+        </div>
+
+        <!-- Search Box -->
+        <div class="search-box">
+            <form class="search-form" id="searchForm" method="post" asp-controller="Home" asp-action="Index">
+                <div class="form-group">
+                    <label for="checkIn">📅 Giriş Tarihi</label>
+                    <input type="date" id="checkIn" name="GirisTarih" value="2024-12-15" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="checkOut">📅 Çıkış Tarihi</label>
+                    <input type="date" id="checkOut" name="CikisTarih" value="2024-12-20" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="city">🏙 Şehir</label>
+                    <input type="text" id="city" placeholder="İstanbul" name="Sehir" value="İstanbul" required>
+                </div>
+
+                <button type="submit" class="btn-search">
+                    🔍 Otel Ara
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ================================
+         MAIN CONTENT
+         ================================ -->
+    <main class="main-content" id="hotels">
+        <!-- Hotels Section -->
+        <section class="hotels-section">
+            <h2 class="section-title">🏨 Öne Çıkan Oteller</h2>
+            <div class="hotels-grid" id="hotelsGrid">
+
+                @{
+                    var index = 0;
+                }
+                @foreach (var x in Model.Oteller.Data.Hotels)
+                {
+                    string[] parcalar = x.AccessibilityLabel.Split('.', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+                    index++;
+                    <div class="hotel-card" data-modal="modal-hotel-@index">
+                        <div class="hotel-card-image">
+                            <img src="@x.Property.PhotoUrls[0]"
+                                 alt="@x.Property.Name">
+                            <span class="hotel-rating">⭐ @x.Property.ReviewScore</span>
+                        </div>
+                        <div class="hotel-card-content">
+                            <h3>@x.Property.Name</h3>
+                            @if(parcalar.Length > 4 && !string.IsNullOrWhiteSpace(parcalar[4]))
+                            {
+                                <p class="hotel-card-location">📍 @parcalar[4] </p>
+                            }
+                            <div class="hotel-card-amenities">
+                                @if(parcalar.Length > 2 && !string.IsNullOrWhiteSpace(parcalar[2]))
+                                {
+                                    <span class="amenity-tag">@parcalar[2]</span>
+                                }
+                                @if (parcalar.Length > 1 && !string.IsNullOrWhiteSpace(parcalar[1]))
+                                {
+                                    <span class="amenity-tag">@parcalar[1]</span>
+                                }
+                                @if (parcalar.Length > 8 && !string.IsNullOrWhiteSpace(parcalar[8]))
+                                {
+                                    <span class="amenity-tag">@parcalar[8]</span>
+                                }
+                                @if (parcalar.Length > 4 && !string.IsNullOrWhiteSpace(parcalar[4]))
+                                {
+                                    <span class="amenity-tag">@parcalar[4]</span>
+                                }
+                            </div>
+
+                            <div class="hotel-card-footer">
+                                @if (parcalar.Length > 7 && !string.IsNullOrWhiteSpace(parcalar[6]) && !string.IsNullOrWhiteSpace(parcalar[7]))
+                                {
+                                    <div class="modal-price">@parcalar[6] @parcalar[7] <span>/ gece</span></div>
+                                }
+
+                                <button class="btn-details">Detaylar</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </section>
+
+        <!-- Sidebar -->
+        @if (Model.SehirAdi != null )
+        {
+        <aside class="sidebar">
+            <!-- Currency Widget -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i>💰</i> Döviz Kurları</h3>
+                <div class="currency-list">
+                    <div class="currency-item">
+                        <span class="currency-name">USD / TRY</span>
+                        <span class="currency-value">@Model.USD ₺</span>
+                    </div>
+                    <div class="currency-item">
+                        <span class="currency-name">EUR / TRY</span>
+                        <span class="currency-value">@Model.EUR ₺</span>
+                    </div>
+                    <div class="currency-item">
+                        <span class="currency-name">GBP / TRY</span>
+                        <span class="currency-value">@Model.GBP ₺</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crypto Widget -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i>💎</i> Kripto Para</h3>
+                <div class="crypto-list">
+                    <div class="crypto-item">
+                        <div class="crypto-icon btc">₿</div>
+                        <div class="crypto-info">
+                            <div class="crypto-name">Bitcoin</div>
+                            <div class="crypto-symbol">BTC</div>
+                        </div>
+                        <div class="crypto-price">
+                            <div class="crypto-value">$@Model.BTC</div>
+                        </div>
+                    </div>
+                    <div class="crypto-item">
+                        <div class="crypto-icon eth">Ξ</div>
+                        <div class="crypto-info">
+                            <div class="crypto-name">Ethereum</div>
+                            <div class="crypto-symbol">ETH</div>
+                        </div>
+                        <div class="crypto-price">
+                            <div class="crypto-value">$@Model.ETH</div>
+                        </div>
+                    </div>
+                    <div class="crypto-item">
+                        <div class="crypto-icon bnb">B</div>
+                        <div class="crypto-info">
+                            <div class="crypto-name">BNB</div>
+                            <div class="crypto-symbol">BNB</div>
+                        </div>
+                        <div class="crypto-price">
+                            <div class="crypto-value">$@Model.BNB</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fuel Widget -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i>⛽</i> Akaryakıt Fiyatları</h3>
+                <div class="fuel-list">
+                    <div class="fuel-item">
+                        <span class="fuel-name">🔴 Benzin (95)</span>
+                        <span class="fuel-value">@Model.Benzin ₺</span>
+                    </div>
+                    <div class="fuel-item">
+                        <span class="fuel-name">🟤 Motorin</span>
+                        <span class="fuel-value">@Model.Motorin ₺</span>
+                    </div>
+                    <div class="fuel-item">
+                        <span class="fuel-name">🟢 LPG</span>
+                        <span class="fuel-value">@Model.LPG ₺</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weather Widget -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i>☁️</i> Hava Durumu - @Model.SehirAdi</h3>
+                <div class="weather-card">
+                    <img href="@Model.İcon" class="weather-icon">
+                    <div class="weather-temp">@Model.Derece°C</div>
+                    <div class="weather-desc">@Model.HavaDurumu</div>
+                    <div class="weather-details">
+                        <span>💧 Nem: @Model.Nem%</span>
+                        <span>💨 Rüzgar: @Model.Ruzgar km/s</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Food Suggestion Widget -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i>🍽️</i> Günün Yemeği Önerisi</h3>
+                <div class="food-card">
+                    <div class="food-emoji">🥗</div>
+                    <div class="food-title">@Model.GununYemegiAdi</div>
+                    <div class="food-desc">
+                        @Model.GununYemegiTarifi
+                    </div>
+                </div>
+            </div>
+
+            <!-- Travel Routes Widget -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title"><i>🗺️</i> @Model.SehirAdi Gezi Rotası</h3>
+                <div class="route-list">
+                    <div class="route-item">
+                        <span class="route-number">1</span>
+                        <div class="route-info">
+                            <h4>@Model.Rota1Baslik</h4>
+                            <p>@Model.Rota1Detay</p>
+                        </div>
+                    </div>
+                    <div class="route-item">
+                        <span class="route-number">2</span>
+                        <div class="route-info">
+                            <h4>@Model.Rota2Baslik</h4>
+                            <p>@Model.Rota2Detay</p>
+                        </div>
+                    </div>
+                    <div class="route-item">
+                        <span class="route-number">3</span>
+                        <div class="route-info">
+                            <h4>@Model.Rota3Baslik</h4>
+                            <p>@Model.Rota3Detay</p>
+                        </div>
+                    </div>
+                    <div class="route-item">
+                        <span class="route-number">4</span>
+                        <div class="route-info">
+                            <h4>@Model.Rota4Baslik</h4>
+                            <p>@Model.Rota4Detay</p>
+                        </div>
+                    </div>
+                    <div class="route-item">
+                        <span class="route-number">5</span>
+                        <div class="route-info">
+                            <h4>@Model.Rota5Baslik</h4>
+                            <p>@Model.Rota5Detay</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </aside>
+        }
+
+    </main>
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-col">
+                <div class="footer-brand">🏨 M<span>Y</span></div>
+                <p class="footer-desc">
+                    Lüks konaklama deneyiminin yeni adresi. En seçkin otellerde unutulmaz anılar biriktirin.
+                </p>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Hızlı Linkler</h4>
+                <ul class="footer-links">
+                    <li><a href="#hotels">Oteller</a></li>
+                    <li><a href="#about">Hakkımızda</a></li>
+                    <li><a href="#contact">İletişim</a></li>
+                    <li><a href="#">SSS</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Destek</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Yardım Merkezi</a></li>
+                    <li><a href="#">İptal Politikası</a></li>
+                    <li><a href="#">Gizlilik Politikası</a></li>
+                    <li><a href="#">Kullanım Şartları</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">İletişim</h4>
+                <ul class="footer-links">
+                    <li>📧 info@M&Y.com</li>
+                    <li>📞 +90 212 555 00 00</li>
+                    <li>📍 İstanbul, Türkiye</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 M&Y. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+
+    @{
+         index = 0;
+    }
+    <!-- Modal 1: The Grand Palace Hotel -->
+    @foreach (var y in Model.Oteller.Data.Hotels)
+    {
+        string[] parcalar = y.AccessibilityLabel.Split('.', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
+
+        index++;
+        <div class="modal-overlay" id="modal-hotel-@index">
+            <div class="modal">
+                <button class="modal-close">✕</button>
+                <div class="modal-slider">
+
+                    @{
+                        int imgCounter = 0;
+                    }
+                    @foreach (var j in y.Property.PhotoUrls)
+                    {
+                        var activeClass = imgCounter == 0 ? "active" : ""; // İlk resimse active ekle
+                        <img src="@j" alt="@y.Property.Name" class="slider-image @activeClass">
+                        imgCounter++;
+                    }
+
+                    <button class="slider-btn prev">❮</button>
+                    <button class="slider-btn next">❯</button>
+
+                    <div class="slider-dots">
+                        @for (int k = 0; k < y.Property.PhotoUrls.Count; k++)
+                        {
+                            var activeDot = k == 0 ? "active" : "";
+                            <span class="slider-dot @activeDot"></span>
+                        }
+                    </div>
+                </div>
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h2 class="modal-title">@y.Property.Name</h2>
+                        <span class="modal-rating">⭐ @y.Property.ReviewScore</span>
+                    </div>
+                    <div class="modal-features">
+                            @if (parcalar.Length > 1 && !string.IsNullOrWhiteSpace(parcalar[1]))
+                        {
+                            <div class="feature-item"><i>✓</i> @parcalar[1] </div>
+                        }
+                        @if (parcalar.Length > 2 && !string.IsNullOrWhiteSpace(parcalar[2]))
+                        {
+                            <div class="feature-item"><i>✓</i> @parcalar[2]</div>
+                        }
+                        @if (parcalar.Length > 3 && !string.IsNullOrWhiteSpace(parcalar[3]))
+                        {
+                            <div class="feature-item"><i>✓</i> @parcalar[3]</div>
+                        }
+                        @if (parcalar.Length > 4 && !string.IsNullOrWhiteSpace(parcalar[4]))
+                        {
+                            <div class="feature-item"><i>✓</i> @parcalar[4]</div>
+                        }
+                        @if (parcalar.Length > 8 && !string.IsNullOrWhiteSpace(parcalar[8]))
+                        {
+                            <div class="feature-item"><i>✓</i> @parcalar[8]</div> 
+                        }
+                    </div>
+                    <div class="modal-footer">
+                        @if (parcalar.Length > 7 && !string.IsNullOrWhiteSpace(parcalar[6]) && !string.IsNullOrWhiteSpace(parcalar[7]))
+                        {
+                            <div class="modal-price">@parcalar[6] @parcalar[7] <span>/ gece</span></div>
+                        }
+                        <button class="btn-book">Rezervasyon Yap</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <script src="~/js/main.js"></script>
+</body>
+
+</html>

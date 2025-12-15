@@ -1,0 +1,19 @@
+# Visual Studio & Build Files
+.vs/
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+
+# API Keys & Secrets (Güvenlik için bu dosyaları yüklememelisin)
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+
+# System Files
+.DS_Store
+Thumbs.db
